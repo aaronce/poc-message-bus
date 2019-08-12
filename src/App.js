@@ -1,22 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo, useEffect } from 'react'
+import { useMessageBus } from './hooks/useMessageBus'
 
 
 const App = () => {
-  const [ expoint, setExpoint] = useState('Sydney')
+  const messageBus = window.messageBus.subjects
+  const [ expoint, setExpoint] = useState('Perth')
 
-  // useMessageBus below??
-  const messageBus = window.messageBus
+  const expointListener = useMessageBus('expoint').subscribe(
+    (x) => {
+      if (expoint !== x) {
+        setExpoint(x)
+      }
+    })
   
-  messageBus.expoint.subscribe(
-    x => {
-      console.log(x)
-    }
-  )
-
-  messageBus.expoint.next('test message send')
+  const handleClick = () => {
+    messageBus.expoint.next('Sydney')
+  }
 
   return (
-      <div>App loaded. {expoint}</div>
+    <div>
+      <p>React App loaded. Expoint = {expoint}</p>
+      <p>
+        <button onClick={handleClick}>Send Sydney</button>
+      </p>
+    </div>  
   )
 } 
 

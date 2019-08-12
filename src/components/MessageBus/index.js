@@ -7,29 +7,16 @@ import UserModel from "../../models/UserModel"
 
 const MessageBus = () => {
 
-  /*const userbus = Object.keys(UserModel).map(key => {
-    return new BehaviorSubject(key)
-  })*/
-
-  const userBus = {}
+  const subjects = {}
   for (const key in UserModel) {
-    userBus[key] = new Subject(UserModel[key])
+    subjects[key] = new Subject(UserModel[key])
   }
 
-  window.messageBus = userBus
-
-  //const bs = new BehaviorSubject(UserModel);
-  
-  //bs.subscribe(console.log);
-
-  //bs.next("Perth");
-
-  //console.log(userBus)
-  //userBus.expoint.subscribe(console.log)
-  //userBus.expoint.next("Perth")
+  window.messageBus = {}
+  window.messageBus.subjects = subjects
 
   return (
-    <div>Message bus loaded.</div>
+    <p>Message bus loaded.</p>
   )
 } 
 
