@@ -17,6 +17,7 @@ const App = () => {
     messageBus.expoint.next('Sydney')
   }
 
+  console.log('React app initiated.')
   return (
     <div>
       <p>React App loaded. Expoint = {expoint}</p>
