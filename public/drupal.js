@@ -19,6 +19,7 @@
                 (x) => {
                   if (this.expoint !== x) {
                     this.expoint = x;
+                    this.updateExpoint();
                     console.log(x)
                   }
                 });
@@ -26,7 +27,14 @@
         render: function () {
             var target = document.getElementById('drupal');
             var drupalApp = document.createElement('p');
-            drupalApp.innerHTML = '<p>Drupal App loaded.</p>';
+            drupalApp.innerHTML = '<p>Drupal App loaded.<span id="expoint"></span></p>';
+            target.appendChild(drupalApp);
+            //console.log(this.expoint);
+        },
+        updateExpoint: function () {
+            var target = document.getElementById('expoint');
+            var drupalApp = document.createElement('span');
+            drupalApp.innerHTML = this.expoint;
             target.appendChild(drupalApp);
             console.log(this.expoint);
         },
@@ -42,4 +50,3 @@
 
     console.log('Drupal.js initialisation');
 }());
-
